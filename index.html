@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="overlay hidden">&mdash;</div>
-      <div class="home-page">
+      <div class="home-page hidden">
         <div class="login-box">
           <p>Log in to get started!</p>
           <form class="login">
@@ -93,6 +93,140 @@
               and update them regularly.
             </li>
           </ul>
+        </div>
+      </div>
+      <div class="app-page">
+        <!--BALANCE-->
+        <div class="balance">
+          <div>
+            <p class="balance__label">Current Balance</p>
+            <p class="balance__date">08/03/2037</p>
+          </div>
+          <p class="balance__value">0000€</p>
+        </div>
+
+        <!-- MOVEMENTS -->
+        <div class="app-wrapper"></div>
+        <div class="movements">
+          <div class="movements__row">
+            <div class="movements__date">08/03/24</div>
+            <div class="movements__value">300€</div>
+            <div class="movements__total">1200€</div>
+          </div>
+          <div class="movements__row">
+            <div class="movements__date">07/02/24</div>
+            <div class="movements__value">-250€</div>
+            <div class="movements__total">900€</div>
+          </div>
+          <div class="movements__row">
+            <div class="movements__date">08/03/24</div>
+            <div class="movements__value">300€</div>
+            <div class="movements__total">1200€</div>
+          </div>
+          <div class="movements__row">
+            <div class="movements__date">07/02/24</div>
+            <div class="movements__value">-250€</div>
+            <div class="movements__total">900€</div>
+          </div>
+          <div class="movements__row">
+            <div class="movements__date">08/03/24</div>
+            <div class="movements__value">300€</div>
+            <div class="movements__total">1200€</div>
+          </div>
+          <div class="movements__row">
+            <div class="movements__date">07/02/24</div>
+            <div class="movements__value">-250€</div>
+            <div class="movements__total">900€</div>
+          </div>
+          <div class="movements__row">
+            <div class="movements__date">08/03/24</div>
+            <div class="movements__value">300€</div>
+            <div class="movements__total">1200€</div>
+          </div>
+          <div class="movements__row">
+            <div class="movements__date">08/03/24</div>
+            <div class="movements__value">300€</div>
+            <div class="movements__total">1200€</div>
+          </div>
+        </div>
+
+        <div class="operations-box">
+          <!--TRANSFERS-->
+          <div class="operation operation--transfers">
+            <h3>Transfer Money</h3>
+            <form class="form form--transfer">
+              <label class="form__label">Transfer to</label>
+              <label class="form__label">Amount</label>
+              <input type="text" class="form__input form__input--to" />
+              <input type="number" class="form__input form__input--amount" />
+              <button class="form__btn form__btn--transfer">&rarr;</button>
+            </form>
+          </div>
+
+          <!-- LOAN -->
+          <div class="operation operation--loan">
+            <h3>Request loan</h3>
+            <form class="form form--loan">
+              <label class="form__label form__label--loan">Amount</label>
+              <input
+                type="number"
+                class="form__input form__input--loan-amount"
+              />
+              <button class="form__btn form__btn--loan">&rarr;</button>
+            </form>
+          </div>
+
+          <!--PAYMENT-->
+          <div class="operation operation--payment">
+            <h3>Make a payment</h3>
+            <form class="form form--loan">
+              <label class="form__label form__label--loan"
+                >Select payment</label
+              >
+              <select
+                class="form__select"
+                id="expenseType"
+                required
+                onchange="updateCost()"
+              >
+                <option value="">Please select...</option>
+                <option value="Phone bill">Phone bill</option>
+                <option value="Mortgage loan">Mortgage loan</option>
+                <option value="Motor vehicle tax">Motor vehicle tax</option>
+                <option value="Electricity bill">Electricity bill</option>
+                <option value="Internet bill">Internet bill</option>
+                <option value="Water bill">Water bill</option>
+              </select>
+              <input
+                class="form__input--payment"
+                type="text"
+                id="expenseCost"
+                placeholder="Cost"
+                readonly
+              />
+
+              <button class="form__btn form__btn--payment">&rarr;</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- SUMMARY -->
+        <div class="summary">
+          <p class="summary__label">In</p>
+          <p class="summary__value summary__value--in">0000€</p>
+          <p class="summary__label">Out</p>
+          <p class="summary__value summary__value--out">0000€</p>
+          <p class="summary__label">Interest</p>
+          <p class="summary__value summary__value--interest">0000€</p>
+        </div>
+
+        <!-- LOGOUT TIMER -->
+        <p class="logout-timer">
+          You will be logged out in <span class="timer">05:00</span>
+        </p>
+
+        <div class="logout-btn">
+          <button class="btn--logout">Log out</button>
         </div>
       </div>
     </main>

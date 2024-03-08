@@ -11,8 +11,9 @@ html {
 
 body {
   font-family: "Biryani", sans-serif;
-  color: #151b1c;
-  background-color: #d5c7a5;
+  color: #2c3233;
+
+  background-color: #fef8ef;
   height: 100vh;
 
   position: relative;
@@ -41,6 +42,8 @@ header {
 main {
   padding: 6rem;
 }
+
+/* ////////////////// HOME PAGE //////////////////*/
 
 .home-page {
   display: grid;
@@ -125,6 +128,8 @@ main {
   flex-direction: column;
   gap: 1.4rem;
 }
+
+/*////////////////// MODAL //////////////////*/
 
 .login-info-box {
   position: fixed;
@@ -237,4 +242,167 @@ main {
   background-color: #d5c7a5;
   border: none;
   border-radius: 5px;
+}
+
+/* /////////// APP PAGE /////////////// */
+
+.app-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 2rem;
+  column-gap: 3rem;
+
+  font-size: 1.4rem;
+
+  max-width: 100rem;
+  margin: 2rem auto;
+}
+
+/*BALANCE*/
+.balance {
+  grid-column: 1 / -1;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.balance__label {
+  font-size: 2.2rem;
+}
+
+.balance__date {
+  font-size: 1.4;
+  color: #737677;
+}
+
+.balance__value {
+  font-size: 4.6rem;
+}
+
+/*MOVEMENTS*/
+
+.movements {
+  background-color: #fdf1df;
+  border-radius: 11px;
+  overflow: scroll;
+}
+
+.movements__row {
+  padding: 2.25rem 4rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #fef8ef;
+
+  display: flex;
+  justify-content: space-between;
+}
+.movements__date {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #666;
+}
+
+.movements__value {
+  font-size: 1.7rem;
+}
+
+.movements__total {
+  font-size: 1.5rem;
+  color: #555;
+}
+
+/*SUMMARY*/
+.summary {
+  display: flex;
+  align-items: baseline;
+}
+
+.summary__label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-right: 0.8rem;
+}
+
+.summary__value {
+  font-size: 2.2rem;
+  margin-right: 2.5rem;
+}
+
+.summary__value--in,
+.summary__value--interest {
+  color: #6895d2;
+}
+
+.summary__value--out {
+  color: #ff6868;
+}
+
+/*OPERATIONS*/
+
+.operations-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.operation {
+  padding: 3rem 4rem;
+  border-radius: 11px;
+}
+
+.operation--transfers {
+  background-image: linear-gradient(to right bottom, #f3b95f, #f4c06f);
+}
+
+.operation--loan {
+  background-image: linear-gradient(to right bottom, #6895d2, #77a0d7);
+}
+
+.operation--payment {
+  background-image: linear-gradient(to right bottom, #ff6868, #ff7777);
+}
+
+h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 2.5fr 2.5fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0.4rem 1rem;
+}
+
+.form__input--to,
+.form__input--amount,
+.form__btn--transfer {
+  grid-row: 2;
+}
+
+.form__input--loan-amount,
+.form__btn--loan {
+  grid-row: 2;
+}
+.form__btn--loan {
+  width: 37.5%;
+}
+.form__select,
+.form__input--payment,
+.form__btn--payment {
+  grid-row: 2;
+}
+
+/*TIMER*/
+.logout-timer {
+  padding: 0 0.3rem;
+  margin-top: 1.9rem;
+  text-align: right;
+  font-size: 1.25rem;
+}
+
+.timer {
+  font-weight: 600;
 }

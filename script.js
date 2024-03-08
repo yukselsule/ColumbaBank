@@ -16,6 +16,14 @@ const account1 = {
   locale: "en-US",
   interestRate: 1.1,
   pin: 1111,
+  expenses: {
+    "Phone bill": "20 €",
+    "Mortgage loan": "1200 €",
+    "Motor vehicle tax": "100 €",
+    "Electricity bill": "50 €",
+    "Internet bill": "30 €",
+    "Water bill": "25 €",
+  },
 };
 const account2 = {
   owner: "Jessica Adams",
@@ -32,6 +40,14 @@ const account2 = {
   locale: "en-US",
   interestRate: 1.2,
   pin: 2222,
+  expenses: {
+    "Phone bill": "35 €",
+    "Mortgage loan": "1600 €",
+    "Motor vehicle tax": "150 €",
+    "Electricity bill": "45 €",
+    "Internet bill": "60 €",
+    "Water bill": "35 €",
+  },
 };
 
 const account3 = {
@@ -49,6 +65,14 @@ const account3 = {
   locale: "en-GB",
   interestRate: 0.7,
   pin: 3333,
+  expenses: {
+    "Phone bill": "25 €",
+    "Mortgage loan": "1400 €",
+    "Motor vehicle tax": "150 €",
+    "Electricity bill": "60 €",
+    "Internet bill": "35 €",
+    "Water bill": "20 €",
+  },
 };
 
 const account4 = {
@@ -66,6 +90,14 @@ const account4 = {
   locale: "de-DE",
   interestRate: 1.5,
   pin: 4444,
+  expenses: {
+    "Phone bill": "30 €",
+    "Mortgage loan": "1000 €",
+    "Motor vehicle tax": "125 €",
+    "Electricity bill": "55 €",
+    "Internet bill": "45 €",
+    "Water bill": "25 €",
+  },
 };
 
 const account5 = {
@@ -84,6 +116,14 @@ const account5 = {
   locale: "en-GB",
   interestRate: 0.9,
   pin: 5555,
+  expenses: {
+    "Phone bill": "45 €",
+    "Mortgage loan": "1550 €",
+    "Motor vehicle tax": "200 €",
+    "Electricity bill": "70 €",
+    "Internet bill": "30 €",
+    "Water bill": "25 €",
+  },
 };
 
 const accounts = [account1, account2, account3, account4, account5];
