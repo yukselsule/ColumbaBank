@@ -14,6 +14,8 @@ body {
   color: #151b1c;
   background-color: #d5c7a5;
   height: 100vh;
+
+  position: relative;
 }
 
 header {
@@ -152,4 +154,87 @@ main {
 .login-info:hover {
   background-color: #68583c;
   color: #f8f8f8;
+}
+
+.modal {
+  padding: 3rem 6rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: #d6b564;
+  box-shadow: 0 3rem 5rem rgba(21, 27, 28, 0.3);
+  border-radius: 11px;
+
+  z-index: 1111;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  column-gap: 3rem;
+  row-gap: 1rem;
+
+  font-size: 2rem;
+  font-weight: 400;
+  overflow: hidden;
+}
+
+.box-top {
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.box {
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.box::after {
+  content: "";
+  position: absolute;
+  left: -1.5rem;
+  right: -1.5rem;
+  bottom: 0;
+  border-bottom: 2px solid #d5c7a5;
+}
+
+.wrapper > .box:nth-child(3n + 1)::after {
+  left: 0;
+}
+
+.wrapper > .box:nth-child(3n)::after {
+  right: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(21, 27, 28, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 5;
+}
+
+.close-modal {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+
+  font-size: 2rem;
+  width: 2.4rem;
+  height: 2.4rem;
+
+  cursor: pointer;
+
+  background-color: #d5c7a5;
+  border: none;
+  border-radius: 5px;
 }

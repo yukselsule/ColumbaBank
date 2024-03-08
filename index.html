@@ -22,13 +22,42 @@
       <div>
         <img class="logo" src="img/logonobg.png" alt="Columba Bank Logo" />
       </div>
-
       <p class="welcome">Welcome to Columba Bank!</p>
     </header>
     <main>
       <div class="login-info-box">
-        <button class="login-info">For login information</button>
+        <button class="open-modal login-info">For login information</button>
       </div>
+      <div class="modal hidden">
+        <button class="close-modal">&times;</button>
+        <div class="wrapper">
+          <!--Table row-->
+          <div class="box box-top">Account Owner</div>
+          <div class="box box-top">Username</div>
+          <div class="box box-top">Password</div>
+          <!--Table row-->
+          <div class="box">Anthony Smith</div>
+          <div class="box">as</div>
+          <div class="box">1111</div>
+          <!--Table row-->
+          <div class="box">Jessica Adams</div>
+          <div class="box">ja</div>
+          <div class="box">2222</div>
+          <!--Table row-->
+          <div class="box">Oliver Miller</div>
+          <div class="box">om</div>
+          <div class="box">3333</div>
+          <!--Table row-->
+          <div class="box">Liam Brown</div>
+          <div class="box">lb</div>
+          <div class="box">4444</div>
+          <!--Table row-->
+          <div class="box">Emily Clark</div>
+          <div class="box">ec</div>
+          <div class="box">5555</div>
+        </div>
+      </div>
+      <div class="overlay hidden">&mdash;</div>
       <div class="home-page">
         <div class="login-box">
           <p>Log in to get started!</p>
@@ -67,5 +96,6 @@
         </div>
       </div>
     </main>
+    <script src="script.js"></script>
   </body>
 </html>
