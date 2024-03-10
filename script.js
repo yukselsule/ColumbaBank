@@ -15,7 +15,7 @@ const account1 = {
   currency: "EUR",
   locale: "en-US",
   interestRate: 1.1,
-  pin: 1111,
+  password: 1111,
   expenses: {
     "Phone bill": "20 €",
     "Mortgage loan": "1200 €",
@@ -39,7 +39,7 @@ const account2 = {
   currency: "USD",
   locale: "en-US",
   interestRate: 1.2,
-  pin: 2222,
+  password: 2222,
   expenses: {
     "Phone bill": "35 €",
     "Mortgage loan": "1600 €",
@@ -64,7 +64,7 @@ const account3 = {
   currency: "GBP",
   locale: "en-GB",
   interestRate: 0.7,
-  pin: 3333,
+  password: 3333,
   expenses: {
     "Phone bill": "25 €",
     "Mortgage loan": "1400 €",
@@ -89,7 +89,7 @@ const account4 = {
   currency: "EUR",
   locale: "de-DE",
   interestRate: 1.5,
-  pin: 4444,
+  password: 4444,
   expenses: {
     "Phone bill": "30 €",
     "Mortgage loan": "1000 €",
@@ -115,7 +115,7 @@ const account5 = {
   currency: "USD",
   locale: "en-GB",
   interestRate: 0.9,
-  pin: 5555,
+  password: 5555,
   expenses: {
     "Phone bill": "45 €",
     "Mortgage loan": "1550 €",
@@ -127,6 +127,42 @@ const account5 = {
 };
 
 const accounts = [account1, account2, account3, account4, account5];
+
+///////////// ELEMENTS
+const labelWelcome = document.querySelector(".welcome");
+const labelDate = document.querySelector(".date");
+const labelBalance = document.querySelector(".balance__value");
+const labelSumIn = document.querySelector(".summary__value--in");
+const labelSumOut = document.querySelector(".summary__value--out");
+const labelSumInterest = document.querySelector(".summary__value--interest");
+const labelTimer = document.querySelector(".timer");
+
+const homePage = document.querySelector(".home-page");
+const appPage = document.querySelector(".app-page");
+
+const btnLogin = document.querySelector(".btn--login");
+const btnTransfer = document.querySelector(".form__btn--transfer");
+const btnLoan = document.querySelector(".form__btn--loan");
+const btnPayment = document.querySelector(".form__btn--payment");
+const btnLogout = document.querySelector(".btn--logout");
+
+const inputLoginUsername = document.querySelector(".login__input--username");
+const inputLoginPassword = document.querySelector(".login__input--password");
+const inputTransferTo = document.querySelector(".form__input--to");
+const inputTransferAmount = document.querySelector(".form__input--amount");
+const inputLoanAmount = document.querySelector(".form__input--loan-amount");
+const expenseType = document.getElementById("expenseType").value;
+const expenseCost = document.getElementById("expenseCost");
+
+const movementsContainer = document.querySelector(".movements");
+
+const infoBox = document.querySelector(".login-info-box");
+const modal = document.querySelector(".modal");
+const overlay = document.querySelector(".overlay");
+const btnOpenModal = document.querySelector(".open-modal");
+const btnCloseModal = document.querySelector(".close-modal");
+
+let currentAccount;
 
 ///// FUNCTIONS
 // create usernames
@@ -141,15 +177,37 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
-console.log(account1);
+const updateUI = function (acc) {
+  // hide home-page / app-page display
+  homePage.classList.add("hidden");
+  appPage.classList.remove("hidden");
 
-//////// MODAL WINDOW
+  // Change welcome message
+  labelWelcome.textContent = `Welcome ${acc.owner}`;
+  // display logout-btn
+  btnLogout.classList.remove("hidden");
+  // hide info box
+  infoBox.classList.add("hidden");
+};
 
-const modal = document.querySelector(".modal");
-const overlay = document.querySelector(".overlay");
-const btnOpenModal = document.querySelector(".open-modal");
-const btnCloseModal = document.querySelector(".close-modal");
+const displayMovemenst = function (acc) {
+  movementsContainer.innerHTML = "";
+};
 
+////////// EVENT LISTENERS
+btnLogin.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
+
+  if (currentAccount?.password === +inputLoginPassword.value) {
+    updateUI(currentAccount);
+  }
+});
+
+//////// MODAL WINDOW -- LOGIN INFO BOX
 // functions
 const openModal = function () {
   modal.classList.remove("hidden");

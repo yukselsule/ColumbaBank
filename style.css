@@ -24,10 +24,11 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* 
-  margin: 4rem 0; */
+
   padding: 0 2rem;
   height: 8rem;
+
+  position: relative;
 }
 
 .logo {
@@ -92,7 +93,7 @@ main {
   border: 1px solid #151b1c;
 }
 
-.login__btn {
+.btn--login {
   border: none;
   padding: 1rem 2rem;
   border-radius: 10rem;
@@ -213,10 +214,6 @@ main {
   right: 0;
 }
 
-.hidden {
-  display: none;
-}
-
 .overlay {
   position: absolute;
   top: 0;
@@ -249,8 +246,9 @@ main {
 .app-page {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto repeat(3, 15rem) auto;
+  column-gap: 2.2rem;
   row-gap: 2rem;
-  column-gap: 3rem;
 
   font-size: 1.4rem;
 
@@ -261,7 +259,6 @@ main {
 /*BALANCE*/
 .balance {
   grid-column: 1 / -1;
-
   display: flex;
   justify-content: space-between;
 }
@@ -284,7 +281,9 @@ main {
 .movements {
   background-color: #fdf1df;
   border-radius: 11px;
-  overflow: scroll;
+  overflow-y: scroll;
+
+  grid-row: 2 / span 3;
 }
 
 .movements__row {
@@ -296,6 +295,7 @@ main {
   display: flex;
   justify-content: space-between;
 }
+
 .movements__date {
   font-size: 1.1rem;
   text-transform: uppercase;
@@ -312,40 +312,7 @@ main {
   color: #555;
 }
 
-/*SUMMARY*/
-.summary {
-  display: flex;
-  align-items: baseline;
-}
-
-.summary__label {
-  font-size: 1.2rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  margin-right: 0.8rem;
-}
-
-.summary__value {
-  font-size: 2.2rem;
-  margin-right: 2.5rem;
-}
-
-.summary__value--in,
-.summary__value--interest {
-  color: #6895d2;
-}
-
-.summary__value--out {
-  color: #ff6868;
-}
-
 /*OPERATIONS*/
-
-.operations-box {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
 
 .operation {
   padding: 3rem 4rem;
@@ -395,6 +362,33 @@ h3 {
   grid-row: 2;
 }
 
+/*SUMMARY*/
+.summary {
+  display: flex;
+  align-items: baseline;
+}
+
+.summary__label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-right: 0.8rem;
+}
+
+.summary__value {
+  font-size: 2.2rem;
+  margin-right: 2.5rem;
+}
+
+.summary__value--in,
+.summary__value--interest {
+  color: #6895d2;
+}
+
+.summary__value--out {
+  color: #ff6868;
+}
+
 /*TIMER*/
 .logout-timer {
   padding: 0 0.3rem;
@@ -405,4 +399,25 @@ h3 {
 
 .timer {
   font-weight: 600;
+}
+
+/* LOGOUT BUTTON */
+
+.btn--logout {
+  display: block;
+  position: absolute;
+  bottom: -4rem;
+  right: 2rem;
+
+  padding: 0.8rem 1.2rem;
+  background-color: #bd3232;
+  border: none;
+  border-radius: 9px;
+
+  color: #f8f8f8;
+  font-family: inherit;
+  cursor: pointer;
+}
+.hidden {
+  display: none;
 }
