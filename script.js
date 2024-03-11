@@ -47,12 +47,12 @@ const account2 = {
   interestRate: 1.2,
   password: 2222,
   expenses: {
-    "Phone bill": "35 €",
-    "Mortgage loan": "1600 €",
-    "Motor vehicle tax": "150 €",
-    "Electricity bill": "45 €",
-    "Internet bill": "60 €",
-    "Water bill": "35 €",
+    "Phone bill": "35",
+    "Mortgage loan": "1600",
+    "Motor vehicle tax": "150",
+    "Electricity bill": "45",
+    "Internet bill": "60",
+    "Water bill": "35",
   },
 };
 
@@ -75,12 +75,12 @@ const account3 = {
   interestRate: 0.7,
   password: 3333,
   expenses: {
-    "Phone bill": "25 €",
-    "Mortgage loan": "1400 €",
-    "Motor vehicle tax": "150 €",
-    "Electricity bill": "60 €",
-    "Internet bill": "35 €",
-    "Water bill": "20 €",
+    "Phone bill": "25",
+    "Mortgage loan": "1400",
+    "Motor vehicle tax": "150",
+    "Electricity bill": "60",
+    "Internet bill": "35",
+    "Water bill": "20",
   },
 };
 
@@ -103,12 +103,12 @@ const account4 = {
   interestRate: 1.5,
   password: 4444,
   expenses: {
-    "Phone bill": "30 €",
-    "Mortgage loan": "1000 €",
-    "Motor vehicle tax": "125 €",
-    "Electricity bill": "55 €",
-    "Internet bill": "45 €",
-    "Water bill": "25 €",
+    "Phone bill": "30",
+    "Mortgage loan": "1000",
+    "Motor vehicle tax": "125",
+    "Electricity bill": "55",
+    "Internet bill": "45",
+    "Water bill": "25",
   },
 };
 
@@ -132,12 +132,12 @@ const account5 = {
   interestRate: 0.9,
   password: 5555,
   expenses: {
-    "Phone bill": "45 €",
-    "Mortgage loan": "1550 €",
-    "Motor vehicle tax": "200 €",
-    "Electricity bill": "70 €",
-    "Internet bill": "30 €",
-    "Water bill": "25 €",
+    "Phone bill": 45,
+    "Mortgage loan": 1550,
+    "Motor vehicle tax": 200,
+    "Electricity bill": 70,
+    "Internet bill": 30,
+    "Water bill": 25,
   },
 };
 
@@ -168,8 +168,7 @@ const inputLoginPassword = document.querySelector(".login__input--password");
 const inputTransferTo = document.querySelector(".form__input--to");
 const inputTransferAmount = document.querySelector(".form__input--amount");
 const inputLoanAmount = document.querySelector(".form__input--loan-amount");
-const expenseType = document.getElementById("expenseType").value;
-const expenseCost = document.getElementById("expenseCost");
+const formSelect = document.querySelector(".form__select");
 
 const movementsContainer = document.querySelector(".movements");
 
@@ -284,6 +283,25 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+// uptade cost
+function updateCost() {
+  const expenseType = document.getElementById("expenseType").value;
+  const expenseCost = document.getElementById("expenseCost");
+
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
+
+  const cost = currentAccount.expenses[expenseType];
+  expenseCost.value = cost;
+
+  if (currentAccount && cost) {
+    expenseCost.value = cost;
+  } else {
+    expenseCost.value = "";
+  }
+}
+
 ////////// EVENT LISTENERS
 btnLogin.addEventListener("click", function (e) {
   e.preventDefault();
@@ -341,6 +359,10 @@ btnLoan.addEventListener("click", function (e) {
 
     updateUI(currentAccount);
   }
+});
+
+btnPayment.addEventListener("click", function (e) {
+  e.preventDefault();
 });
 
 btnLogout.addEventListener("click", function (e) {
