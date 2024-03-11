@@ -178,7 +178,7 @@ const overlay = document.querySelector(".overlay");
 const btnOpenModal = document.querySelector(".open-modal");
 const btnCloseModal = document.querySelector(".close-modal");
 
-let currentAccount;
+let currentAccount, expenseType, expenseCost;
 
 ///// FUNCTIONS
 // create usernames
@@ -285,8 +285,8 @@ const updateUI = function (acc) {
 
 // uptade cost
 function updateCost() {
-  const expenseType = document.getElementById("expenseType").value;
-  const expenseCost = document.getElementById("expenseCost");
+  expenseType = document.getElementById("expenseType").value;
+  expenseCost = document.getElementById("expenseCost");
 
   currentAccount = accounts.find(
     (acc) => acc.username === inputLoginUsername.value
@@ -363,6 +363,27 @@ btnLoan.addEventListener("click", function (e) {
 
 btnPayment.addEventListener("click", function (e) {
   e.preventDefault();
+  const now = new Date();
+  const formattedDate = now.toISOString();
+  const expenseTypeSelect = document.getElementById("expenseType");
+
+  if (expenseCost.value && expenseCost.value < currentAccount.balance) {
+    currentAccount.movements.push({
+      amount: -expenseCost.value,
+      date: formattedDate,
+    });
+    expenseCost.value = "";
+    formSelect.selectedIndex = 0;
+
+    for (let i = 0; i < expenseTypeSelect.options.length; i++) {
+      if (expenseTypeSelect.options[i].value === expenseType) {
+        expenseTypeSelect.remove(i);
+        break;
+      }
+    }
+
+    updateUI(currentAccount);
+  }
 });
 
 btnLogout.addEventListener("click", function (e) {
