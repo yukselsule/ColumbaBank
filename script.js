@@ -177,13 +177,13 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
-const updateUI = function (acc) {
+const displayAppPage = function (acc) {
   // hide home-page / app-page display
   homePage.classList.add("hidden");
   appPage.classList.remove("hidden");
 
   // Change welcome message
-  labelWelcome.textContent = `Welcome ${acc.owner}`;
+  labelWelcome.textContent = `Welcome ${acc.owner}!`;
   // display logout-btn
   btnLogout.classList.remove("hidden");
   // hide info box
@@ -192,6 +192,20 @@ const updateUI = function (acc) {
 
 const displayMovemenst = function (acc) {
   movementsContainer.innerHTML = "";
+};
+
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+};
+
+const updateUI = function (acc) {
+  // display app page
+  displayAppPage(acc);
+
+  // dispaly balance
+  calcDisplayBalance(acc);
+
+  // display summary
 };
 
 ////////// EVENT LISTENERS
