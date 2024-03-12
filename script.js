@@ -273,18 +273,27 @@ const displayMovements = function (acc) {
   const dates = acc.movements.map((movement) => movement.date);
   console.log(dates);
 
-  // const displayDate = formatMovementDate(dates, acc.locale, acc.currency);
-
   let cumulativeSum = 0;
 
   acc.movements.forEach(function (movement) {
     cumulativeSum += movement.amount;
 
+    const formattedMov = new Intl.NumberFormat(acc.locale, {
+      style: "currency",
+      currency: acc.currency,
+    }).format(movement.amount);
+
+    const formattedCumulativeSum = new Intl.NumberFormat(acc.locale, {
+      style: "currency",
+      currency: acc.currency,
+    }).format(cumulativeSum);
+
+    //   <div class="movements__date">${}</div>
     const html = `
       <div class="movements__row">
-        <div class="movements__date">08/12/24</div>
-        <div class="movements__value">${movement.amount}€</div>
-        <div class="movements__cumulative-sum">${cumulativeSum}€</div>
+     
+        <div class="movements__value">${formattedMov}</div>
+        <div class="movements__cumulative-sum">${formattedCumulativeSum}</div>
       </div>`;
 
     movementsContainer.insertAdjacentHTML("afterbegin", html);
@@ -372,14 +381,14 @@ const startLogOutTimer = function () {
 
     if (time === 0) {
       clearInterval(timer);
-      labelWelcome.textContent = "Log in to get started";
-      containerApp.style.opacity = 0;
+      labelWelcome.textContent = "Welcome to Columba Bank!";
+      displayHomePage();
     }
 
     time--;
   };
 
-  let time = 600;
+  let time = 300;
 
   tick();
   const timer = setInterval(tick, 1000);
