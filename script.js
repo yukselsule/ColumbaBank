@@ -143,8 +143,6 @@ const account5 = {
 
 const accounts = [account1, account2, account3, account4, account5];
 
-console.log(Object.values(account1.movements));
-
 ///////////// ELEMENTS
 const labelWelcome = document.querySelector(".welcome");
 const labelDate = document.querySelector(".date");
@@ -281,6 +279,13 @@ const updateUI = function (acc) {
   displayMovements(acc);
   // display summary
   calcDisplaySummary(acc);
+
+  // reset select --> ödeme yapılmadıysa element kalıyor ve sıfırlanmıyor o yüzden bu koda ihtiyaç var
+  expenseType = document.getElementById("expenseType").value;
+  expenseCost = document.getElementById("expenseCost");
+
+  expenseCost.value = "";
+  formSelect.selectedIndex = 0;
 };
 
 // uptade cost
@@ -372,15 +377,13 @@ btnPayment.addEventListener("click", function (e) {
       amount: -expenseCost.value,
       date: formattedDate,
     });
-    expenseCost.value = "";
-    formSelect.selectedIndex = 0;
 
-    for (let i = 0; i < expenseTypeSelect.options.length; i++) {
-      if (expenseTypeSelect.options[i].value === expenseType) {
-        expenseTypeSelect.remove(i);
-        break;
-      }
-    }
+    // for (let i = 0; i < expenseTypeSelect.options.length; i++) {
+    //   if (expenseTypeSelect.options[i].value === expenseType) {
+    //     expenseTypeSelect.remove(i);
+    //     break;
+    //   }
+    // }
 
     updateUI(currentAccount);
   }
