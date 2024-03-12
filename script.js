@@ -141,11 +141,40 @@ const account5 = {
   },
 };
 
-const accounts = [account1, account2, account3, account4, account5];
+const account6 = {
+  owner: "Bilge Kaya",
+  movements: [
+    { amount: 2000, date: "2021-05-07T23:15:33.000Z" },
+    { amount: -100, date: "2021-09-21T06:48:16.000Z" },
+    { amount: 2450, date: "2022-02-15T17:11:59.000Z" },
+    { amount: -400, date: "2022-04-19T16:49:59.000Z" },
+    { amount: 900, date: "2022-06-15T03:26:35.000Z" },
+    { amount: -1200, date: "2023-01-09T12:43:17.000Z" },
+    { amount: 2100, date: "2023-05-12T19:45:23.000Z" },
+    { amount: 3100, date: "2023-12-21T19:35:13.000Z" },
+    { amount: -1500, date: "2024-01-02T15:33:22.000Z" },
+    { amount: -650, date: "2024-02-21T11:35:23.000Z" },
+    { amount: 1200, date: "2024-03-09T06:58:42.000Z" },
+  ],
+  currency: "TRY",
+  locale: "tr-TR",
+  interestRate: 0.75,
+  password: 6666,
+  expenses: {
+    "Phone bill": 120,
+    "Mortgage loan": 2000,
+    "Motor vehicle tax": 400,
+    "Electricity bill": 135,
+    "Internet bill": 225,
+    "Water bill": 150,
+  },
+};
+
+const accounts = [account1, account2, account3, account4, account5, account6];
 
 ///////////// ELEMENTS
 const labelWelcome = document.querySelector(".welcome");
-const labelDate = document.querySelector(".date");
+const labelDate = document.querySelector(".balance__date");
 const labelBalance = document.querySelector(".balance__value");
 const labelSumIn = document.querySelector(".summary__value--in");
 const labelSumOut = document.querySelector(".summary__value--out");
@@ -176,7 +205,7 @@ const overlay = document.querySelector(".overlay");
 const btnOpenModal = document.querySelector(".open-modal");
 const btnCloseModal = document.querySelector(".close-modal");
 
-let currentAccount, expenseType, expenseCost;
+let currentAccount, expenseType, expenseCost, timer;
 
 ///// FUNCTIONS
 // create usernames
@@ -220,8 +249,31 @@ const displayHomePage = function () {
   infoBox.classList.remove("hidden");
 };
 
+const formatMovementDate = function (date, locale) {
+  const calcDaysPassed = (d1, d2) =>
+    Math.round(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24));
+  const daysPassed = calcDaysPassed(new Date(), date);
+  if (daysPassed === 0) return "Today";
+  if (daysPassed === 1) return "Yesterday";
+  else {
+    return new Intl.DateTimeFormat(locale).format(date);
+  }
+};
+
+const formatCurrency = function (value, locale, currency) {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: currency,
+  }).format(value);
+};
+
 const displayMovements = function (acc) {
   movementsContainer.innerHTML = "";
+
+  const dates = acc.movements.map((movement) => movement.date);
+  console.log(dates);
+
+  // const displayDate = formatMovementDate(dates, acc.locale, acc.currency);
 
   let cumulativeSum = 0;
 
@@ -230,7 +282,7 @@ const displayMovements = function (acc) {
 
     const html = `
       <div class="movements__row">
-        <div class="movements__date">08/03/24</div>
+        <div class="movements__date">08/12/24</div>
         <div class="movements__value">${movement.amount}€</div>
         <div class="movements__cumulative-sum">${cumulativeSum}€</div>
       </div>`;
@@ -244,7 +296,11 @@ const calcDisplayBalance = function (acc) {
 
   acc.balance = amounts.reduce((acc, mov) => acc + mov, 0);
 
-  labelBalance.textContent = acc.balance;
+  labelBalance.textContent = formatCurrency(
+    acc.balance,
+    acc.locale,
+    acc.currency
+  );
 };
 
 const calcDisplaySummary = function (acc) {
@@ -306,6 +362,29 @@ function updateCost() {
     expenseCost.value = "";
   }
 }
+// timer
+const startLogOutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    labelTimer.textContent = `${min}:${sec}`;
+
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = "Log in to get started";
+      containerApp.style.opacity = 0;
+    }
+
+    time--;
+  };
+
+  let time = 600;
+
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
 
 ////////// EVENT LISTENERS
 btnLogin.addEventListener("click", function (e) {
@@ -316,6 +395,26 @@ btnLogin.addEventListener("click", function (e) {
   );
 
   if (currentAccount?.password === +inputLoginPassword.value) {
+    // timer
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
+
+    // current date and time
+    const now = new Date();
+    const options = {
+      hour: "numeric",
+      minute: "numeric",
+      day: "numeric",
+      month: "numeric",
+      year: "2-digit",
+      weekday: "short",
+    };
+
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale,
+      options
+    ).format(now);
+
     updateUI(currentAccount);
   }
 });
@@ -343,7 +442,9 @@ btnTransfer.addEventListener("click", function (e) {
 
     updateUI(currentAccount);
 
-    console.log(receiverAcc.movements);
+    // reset timer
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
 });
 
@@ -358,11 +459,16 @@ btnLoan.addEventListener("click", function (e) {
   inputLoanAmount.value = "";
 
   if (amount > 0 && amount <= maxIncome * 2) {
-    const now = new Date();
-    const formattedDate = now.toISOString();
-    currentAccount.movements.push({ amount: amount, date: formattedDate });
+    setTimeout(function () {
+      const now = new Date();
+      const formattedDate = now.toISOString();
+      currentAccount.movements.push({ amount: amount, date: formattedDate });
 
-    updateUI(currentAccount);
+      updateUI(currentAccount);
+    }, 3000);
+    // reset timer
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
 });
 
@@ -378,14 +484,11 @@ btnPayment.addEventListener("click", function (e) {
       date: formattedDate,
     });
 
-    // for (let i = 0; i < expenseTypeSelect.options.length; i++) {
-    //   if (expenseTypeSelect.options[i].value === expenseType) {
-    //     expenseTypeSelect.remove(i);
-    //     break;
-    //   }
-    // }
-
     updateUI(currentAccount);
+
+    // reset timer
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
 });
 
