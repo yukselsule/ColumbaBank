@@ -245,7 +245,7 @@ main {
 
 .app-page {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4fr 3fr;
   grid-template-rows: auto repeat(3, 15rem) auto;
   column-gap: 2.2rem;
   row-gap: 2rem;

@@ -270,28 +270,29 @@ const formatCurrency = function (value, locale, currency) {
 const displayMovements = function (acc) {
   movementsContainer.innerHTML = "";
 
-  const dates = acc.movements.map((movement) => movement.date);
-  console.log(dates);
-
   let cumulativeSum = 0;
 
   acc.movements.forEach(function (movement) {
     cumulativeSum += movement.amount;
 
-    const formattedMov = new Intl.NumberFormat(acc.locale, {
-      style: "currency",
-      currency: acc.currency,
-    }).format(movement.amount);
+    const date = new Date(movement.date);
+    const displayDate = formatMovementDate(date, acc.locale);
 
-    const formattedCumulativeSum = new Intl.NumberFormat(acc.locale, {
-      style: "currency",
-      currency: acc.currency,
-    }).format(cumulativeSum);
+    const formattedMov = formatCurrency(
+      movement.amount,
+      acc.locale,
+      acc.currency
+    );
 
-    //   <div class="movements__date">${}</div>
+    const formattedCumulativeSum = formatCurrency(
+      cumulativeSum,
+      acc.locale,
+      acc.currency
+    );
+
     const html = `
       <div class="movements__row">
-     
+     <div class="movements__date">${displayDate}</div>
         <div class="movements__value">${formattedMov}</div>
         <div class="movements__cumulative-sum">${formattedCumulativeSum}</div>
       </div>`;
@@ -317,20 +318,24 @@ const calcDisplaySummary = function (acc) {
     .map((mov) => mov.amount)
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = incomes;
+  labelSumIn.textContent = formatCurrency(incomes, acc.locale, acc.currency);
 
   const outgoings = acc.movements
     .map((mov) => mov.amount)
     .filter((mov) => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = outgoings;
+  labelSumOut.textContent = formatCurrency(outgoings, acc.locale, acc.currency);
 
   const interest = acc.movements
     .map((mov) => mov.amount)
     .filter((mov) => mov > 0)
     .map((income) => (income * acc.interestRate) / 100)
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = Math.floor(interest);
+  labelSumInterest.textContent = formatCurrency(
+    interest,
+    acc.locale,
+    acc.currency
+  );
 };
 
 const updateUI = function (acc) {
@@ -345,7 +350,10 @@ const updateUI = function (acc) {
   // display summary
   calcDisplaySummary(acc);
 
-  // reset select --> ödeme yapılmadıysa element kalıyor ve sıfırlanmıyor o yüzden bu koda ihtiyaç var
+  // clear input areas in case click event hasn't happened
+  inputTransferAmount.value = inputTransferTo.value = "";
+  inputLoanAmount.value = "";
+
   expenseType = document.getElementById("expenseType").value;
   expenseCost = document.getElementById("expenseCost");
 
