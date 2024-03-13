@@ -27,6 +27,7 @@ const account1 = {
     "Internet bill": "30",
     "Water bill": "25",
   },
+  paymentsMade: [],
 };
 const account2 = {
   owner: "Jessica Adams",
@@ -54,6 +55,7 @@ const account2 = {
     "Internet bill": "60",
     "Water bill": "35",
   },
+  paymentsMade: [],
 };
 
 const account3 = {
@@ -82,6 +84,7 @@ const account3 = {
     "Internet bill": "35",
     "Water bill": "20",
   },
+  paymentsMade: [],
 };
 
 const account4 = {
@@ -110,6 +113,7 @@ const account4 = {
     "Internet bill": "45",
     "Water bill": "25",
   },
+  paymentsMade: [],
 };
 
 const account5 = {
@@ -139,6 +143,7 @@ const account5 = {
     "Internet bill": 30,
     "Water bill": 25,
   },
+  paymentsMade: [],
 };
 
 const account6 = {
@@ -168,6 +173,7 @@ const account6 = {
     "Internet bill": 225,
     "Water bill": 150,
   },
+  paymentsMade: [],
 };
 
 const accounts = [account1, account2, account3, account4, account5, account6];
@@ -337,6 +343,20 @@ const calcDisplaySummary = function (acc) {
     acc.currency
   );
 };
+// update paymengt options
+function updatePaymentOptions(acc) {
+  const expenseTypeSelect = document.getElementById("expenseType");
+  expenseTypeSelect.innerHTML = '<option value="">Please select...</option>';
+
+  Object.keys(acc.expenses).forEach((expense) => {
+    if (!acc.paymentsMade || !acc.paymentsMade.includes(expense)) {
+      const option = document.createElement("option");
+      option.value = expense;
+      option.textContent = expense;
+      expenseTypeSelect.appendChild(option);
+    }
+  });
+}
 
 const updateUI = function (acc) {
   // display app page
@@ -349,6 +369,9 @@ const updateUI = function (acc) {
   displayMovements(acc);
   // display summary
   calcDisplaySummary(acc);
+
+  // update select element
+  updatePaymentOptions(acc);
 
   // clear input areas in case click event hasn't happened
   inputTransferAmount.value = inputTransferTo.value = "";
@@ -491,15 +514,24 @@ btnLoan.addEventListener("click", function (e) {
 
 btnPayment.addEventListener("click", function (e) {
   e.preventDefault();
-  const now = new Date();
-  const formattedDate = now.toISOString();
   const expenseTypeSelect = document.getElementById("expenseType");
+  const selectedExpense = expenseTypeSelect.value;
+  const expenseCostValue = document.getElementById("expenseCost").value;
 
-  if (expenseCost.value && expenseCost.value < currentAccount.balance) {
+  if (
+    selectedExpense &&
+    expenseCostValue &&
+    expenseCost.value &&
+    expenseCost.value <= currentAccount.balance
+  ) {
+    const now = new Date();
+    const formattedDate = now.toISOString();
     currentAccount.movements.push({
-      amount: -expenseCost.value,
+      amount: -expenseCostValue,
       date: formattedDate,
     });
+
+    currentAccount.paymentsMade.push(expenseTypeSelect);
 
     updateUI(currentAccount);
 
