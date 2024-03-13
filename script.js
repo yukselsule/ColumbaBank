@@ -18,7 +18,7 @@ const account1 = {
   currency: "EUR",
   locale: "en-US",
   interestRate: 1.1,
-  password: 19181716,
+  password: 1111,
   expenses: {
     "Phone bill": "20",
     "Mortgage loan": "1200",
@@ -255,6 +255,10 @@ const displayHomePage = function () {
   infoBox.classList.remove("hidden");
 };
 
+const resetCurrentAccount = function () {
+  currentAccount = {};
+};
+
 const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (d1, d2) =>
     Math.round(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24));
@@ -343,18 +347,23 @@ const calcDisplaySummary = function (acc) {
     acc.currency
   );
 };
-// update paymengt options
+
+// update payment options
 function updatePaymentOptions(acc) {
   const expenseTypeSelect = document.getElementById("expenseType");
   expenseTypeSelect.innerHTML = '<option value="">Please select...</option>';
 
   Object.keys(acc.expenses).forEach((expense) => {
-    if (!acc.paymentsMade || !acc.paymentsMade.includes(expense)) {
-      const option = document.createElement("option");
-      option.value = expense;
-      option.textContent = expense;
-      expenseTypeSelect.appendChild(option);
+    if (acc.paymentsMade.includes(expense)) {
+      delete currentAccount.expenses[expense];
+
+      return;
     }
+
+    const option = document.createElement("option");
+    option.value = expense;
+    option.textContent = expense;
+    expenseTypeSelect.appendChild(option);
   });
 }
 
@@ -402,6 +411,7 @@ function updateCost() {
     expenseCost.value = "";
   }
 }
+
 // timer
 const startLogOutTimer = function () {
   const tick = function () {
@@ -414,6 +424,7 @@ const startLogOutTimer = function () {
       clearInterval(timer);
       labelWelcome.textContent = "Welcome to Columba Bank!";
       displayHomePage();
+      resetCurrentAccount();
     }
 
     time--;
@@ -531,8 +542,9 @@ btnPayment.addEventListener("click", function (e) {
       date: formattedDate,
     });
 
-    currentAccount.paymentsMade.push(expenseTypeSelect);
-
+    currentAccount.paymentsMade.push(expenseTypeSelect.value);
+    // console.log(currentAccount.paymentsMade);
+    // console.log(currentAccount.expenses);
     updateUI(currentAccount);
 
     // reset timer
@@ -545,6 +557,7 @@ btnLogout.addEventListener("click", function (e) {
   e.preventDefault();
 
   displayHomePage();
+  resetCurrentAccount();
 });
 
 //////// MODAL WINDOW -- LOGIN INFO BOX
