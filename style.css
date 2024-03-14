@@ -31,6 +31,11 @@ header {
   position: relative;
 }
 
+.header-wrapper {
+  display: flex;
+  gap: 4rem;
+}
+
 .logo {
   width: 50%;
 }
@@ -252,7 +257,7 @@ main {
 
   font-size: 1.4rem;
 
-  max-width: 100rem;
+  max-width: 110rem;
   margin: 2rem auto;
 }
 
@@ -315,7 +320,7 @@ main {
 /*OPERATIONS*/
 
 .operation {
-  padding: 3rem 4rem;
+  padding: 2rem 3rem;
   border-radius: 11px;
 }
 
@@ -339,27 +344,50 @@ h3 {
 .form {
   display: grid;
   grid-template-columns: 2.5fr 2.5fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 0.4rem 1rem;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.6rem 1rem;
 }
 
-.form__input--to,
-.form__input--amount,
-.form__btn--transfer {
+.form.form--loan {
+  grid-template-columns: 2.5fr 1fr 2.5fr;
+}
+
+.form__input,
+.form__btn,
+.form__select {
   grid-row: 2;
 }
 
-.form__input--loan-amount,
-.form__btn--loan {
-  grid-row: 2;
+.form__input,
+.form__select {
+  width: 100%;
+  border: none;
+  background-color: #fef8ef;
+  font-family: inherit;
+  color: #151b1c;
+  font-size: 1.4rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 5px;
 }
-.form__btn--loan {
-  width: 37.5%;
+
+.form__input:focus,
+.form__select:focus {
+  outline: none;
 }
-.form__select,
-.form__input--payment,
-.form__btn--payment {
-  grid-row: 2;
+
+.form__btn {
+  display: inline-block;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  background-color: #fef8ef;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.form__btn:hover {
+  background-color: #fbf1e3;
 }
 
 /*SUMMARY*/
@@ -404,11 +432,6 @@ h3 {
 /* LOGOUT BUTTON */
 
 .btn--logout {
-  display: block;
-  position: absolute;
-  bottom: -4rem;
-  right: 2rem;
-
   padding: 0.8rem 1.2rem;
   background-color: #bd3232;
   border: none;

@@ -22,9 +22,11 @@
       <div>
         <img class="logo" src="img/logonobg.png" alt="Columba Bank Logo" />
       </div>
-      <p class="welcome">Welcome to Columba Bank!</p>
+      <div class="header-wrapper">
+        <p class="welcome">Welcome to Columba Bank!</p>
 
-      <button class="btn--logout hidden">Log out</button>
+        <button class="btn--logout hidden">Log out</button>
+      </div>
     </header>
     <main>
       <div class="login-info-box">
@@ -130,7 +132,7 @@
           <h3>Transfer Money</h3>
           <form class="form form--transfer">
             <label class="form__label">Transfer to</label>
-            <label class="form__label">Amount</label>
+            <label class="form__label form__label--amount">Amount</label>
             <input type="text" class="form__input form__input--to" />
             <input type="number" class="form__input form__input--amount" />
             <button class="form__btn form__btn--transfer">&rarr;</button>
@@ -150,8 +152,10 @@
         <!--PAYMENT-->
         <div class="operation operation--payment">
           <h3>Make a payment</h3>
-          <form class="form form--loan">
-            <label class="form__label form__label--loan">Select payment</label>
+          <form class="form form--payment">
+            <label class="form__label form__label--payment"
+              >Select payment</label
+            >
             <select
               class="form__select"
               id="expenseType"
@@ -167,7 +171,7 @@
               <option value="Water bill">Water bill</option>
             </select>
             <input
-              class="form__input--payment"
+              class="form__input form__input--payment"
               type="text"
               id="expenseCost"
               placeholder="Cost"
