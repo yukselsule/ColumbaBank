@@ -18,6 +18,9 @@
 </li>
 </ul>
 
+<img src="https://github.com/yukselsule/ColumbaBank/assets/156197141/d5ed76eb-f472-4d20-afa7-fd3e18621a00">
+</img>
+
 <h2>How to Use</h2>
 <p>To log into Columba Bank:
 </p>
