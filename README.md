@@ -1,7 +1,7 @@
 <h1>Columba Bank</h1>
 <p>Welcome to Columba Bank, a fictitious online banking web application designed to simulate real-world banking operations. This project aims to provide an interactive environment for users to engage in various banking activities, all powered by the latest web technologies.
 </p>
-<img>![Columba Bank](https://github.com/yukselsule/ColumbaBank/assets/156197141/9a44ed2c-b3ff-4898-8f3e-74b20ff6bf16)
+<img src="https://github.com/yukselsule/ColumbaBank/assets/156197141/9a44ed2c-b3ff-4898-8f3e-74b20ff6bf16">
 </img>
 
 <h2>Features</h2>
