@@ -32,7 +32,8 @@ header {
 }
 
 .header-wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
   gap: 4rem;
 }
 
@@ -43,6 +44,7 @@ header {
 .welcome {
   font-size: 2.2rem;
   color: #f8f8f8;
+  text-align: end;
 }
 
 main {
@@ -444,4 +446,114 @@ h3 {
 
 .hidden {
   display: none;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 64em) {
+  html {
+    font-size: 52%;
+  }
+
+  .home-page {
+    grid-template-columns: 1fr;
+    row-gap: 6rem;
+    padding: 0 6rem;
+  }
+
+  .login-box,
+  .safety-message {
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 52em) {
+  .app-page {
+    grid-template-columns: 1fr;
+    gap: 3.2rem;
+    padding: 0 4rem;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 48em) {
+  html {
+    font-size: 50%;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+  }
+
+  .logo {
+    width: 75%;
+  }
+
+  .welcome {
+    font-size: 1.8rem;
+    align-self: center;
+  }
+
+  .btn--logout {
+    font-size: 1.4rem;
+  }
+
+  .home-page {
+    row-gap: 3rem;
+    padding: 0;
+  }
+  .login-box,
+  .safety-message {
+    gap: 2rem;
+  }
+
+  .app-page {
+    margin: 1rem auto;
+  }
+
+  .form__label--payment {
+    grid-column: span 2;
+  }
+}
+@media (max-width: 35em) {
+  html {
+    font-size: 46%;
+  }
+
+  header {
+    grid-template-columns: 1fr 5fr;
+  }
+
+  .logo {
+    width: 100%;
+  }
+
+  .app-page {
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .balance__label {
+    font-size: 1.6rem;
+  }
+
+  .balance__date {
+    font-size: 1;
+    color: #737677;
+  }
+
+  .balance__value {
+    font-size: 3rem;
+  }
+
+  .summary {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+@media (max-width: 25em) {
+  .login {
+    width: 100%;
+  }
 }
