@@ -668,5 +668,3 @@ const closeModal = function () {
 btnOpenModal.addEventListener("click", openModal);
 btnCloseModal.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
-
-//////////////// Currency Converter
