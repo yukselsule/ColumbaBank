@@ -1,7 +1,6 @@
 "use strict";
 
-// DATA
-const account1 = {
+const accountData1 = {
   owner: "Anthony Smith",
   movements: [
     { amount: 250, date: "2021-11-18T21:31:17.178Z" },
@@ -15,22 +14,22 @@ const account1 = {
     { amount: 200, date: "2024-01-26T16:15:23.000Z" },
     { amount: 2500, date: "2024-02-13T21:31:17.790Z" },
   ],
-  currency: "EUR",
+  currency: "USD",
   locale: "en-US",
   interestRate: 1.1,
   password: 1111,
   expenses: {
-    "Phone bill": "20",
-    "Mortgage loan": "1200",
-    "Motor vehicle tax": "100",
-    "Electricity bill": "50",
-    "Internet bill": "30",
-    "Water bill": "25",
+    "Phone bill": 20,
+    "Mortgage loan": 1200,
+    "Motor vehicle tax": 100,
+    "Electricity bill": 50,
+    "Internet bill": 30,
+    "Water bill": 25,
+    "Health insurance": 450,
   },
-  paymentsMade: [],
 };
-const account2 = {
-  owner: "Jessica Adams",
+const accountData2 = {
+  owner: "Henry Meyer",
   movements: [
     { amount: 500, date: "2021-10-05T14:48:00.000Z" },
     { amount: 2350, date: "2022-01-25T09:15:23.000Z" },
@@ -43,22 +42,21 @@ const account2 = {
     { amount: 750, date: "2024-01-20T11:42:17.000Z" },
     { amount: 200, date: "2024-03-06T16:15:23.000Z" },
   ],
-  currency: "USD",
-  locale: "en-US",
+  currency: "EUR",
+  locale: "de-DE",
   interestRate: 1.2,
   password: 2222,
   expenses: {
-    "Phone bill": "35",
-    "Mortgage loan": "1600",
-    "Motor vehicle tax": "150",
-    "Electricity bill": "45",
-    "Internet bill": "60",
-    "Water bill": "35",
+    "Phone bill": 35,
+    "Mortgage loan": 1600,
+    "Motor vehicle tax": 150,
+    "Electricity bill": 45,
+    "Internet bill": 60,
+    "Water bill": 35,
   },
-  paymentsMade: [],
 };
 
-const account3 = {
+const accountData3 = {
   owner: "Olivia Miller",
   movements: [
     { amount: 780, date: "2021-09-15T23:36:17.000Z" },
@@ -77,46 +75,45 @@ const account3 = {
   interestRate: 0.7,
   password: 3333,
   expenses: {
-    "Phone bill": "25",
-    "Mortgage loan": "1400",
-    "Motor vehicle tax": "150",
-    "Electricity bill": "60",
-    "Internet bill": "35",
-    "Water bill": "20",
+    "Phone bill": 25,
+    "Mortgage loan": 1400,
+    "Motor vehicle tax": 150,
+    "Electricity bill": 60,
+    "Internet bill": 35,
+    "Water bill": 20,
   },
-  paymentsMade: [],
 };
 
-const account4 = {
-  owner: "Liam Brown",
+const accountData4 = {
+  owner: "Furio Giunta",
   movements: [
     { amount: 430, date: "2021-08-19T09:12:34.000Z" },
-    { amount: 1000, date: "2021-12-23T10:28:46.000Z" },
-    { amount: 700, date: "2022-05-01T11:23:00.000Z" },
+    { amount: 10000, date: "2021-12-23T10:28:46.000Z" },
+    { amount: 7000, date: "2022-05-01T11:23:00.000Z" },
     { amount: -500, date: "2022-08-22T14:14:15.000Z" },
     { amount: 1500, date: "2023-02-18T16:33:22.000Z" },
-    { amount: -650, date: "2023-04-25T10:45:23.000Z" },
-    { amount: 1200, date: "2023-07-29T12:58:42.000Z" },
+    { amount: -6500, date: "2023-04-25T10:45:23.000Z" },
+    { amount: 12000, date: "2023-07-29T12:58:42.000Z" },
     { amount: -550, date: "2023-11-05T14:17:56.000Z" },
     { amount: 3750, date: "2023-11-11T11:32:04.000Z" },
     { amount: -200, date: "2024-03-06T15:15:23.000Z" },
   ],
   currency: "EUR",
-  locale: "de-DE",
+  locale: "it-IT",
   interestRate: 1.5,
   password: 4444,
   expenses: {
-    "Phone bill": "30",
-    "Mortgage loan": "1000",
-    "Motor vehicle tax": "125",
-    "Electricity bill": "55",
-    "Internet bill": "45",
-    "Water bill": "25",
+    "Phone bill": 15,
+    "Mortgage loan": 2500,
+    "Motor vehicle tax": 125,
+    "Electricity bill": 55,
+    "Gas bill": 30,
+    "Internet bill": 30,
+    "Water bill": 25,
   },
-  paymentsMade: [],
 };
 
-const account5 = {
+const accountData5 = {
   owner: "Emily Clark",
   movements: [
     { amount: 200, date: "2021-07-03T13:15:33.000Z" },
@@ -131,7 +128,7 @@ const account5 = {
     { amount: -650, date: "2024-02-29T11:35:23.000Z" },
     { amount: 1200, date: "2024-03-11T06:58:42.000Z" },
   ],
-  currency: "USD",
+  currency: "GBP",
   locale: "en-GB",
   interestRate: 0.9,
   password: 5555,
@@ -143,40 +140,37 @@ const account5 = {
     "Internet bill": 30,
     "Water bill": 25,
   },
-  paymentsMade: [],
 };
 
-const account6 = {
+const accountData6 = {
   owner: "Bilge Kaya",
   movements: [
-    { amount: 2000, date: "2021-05-07T23:15:33.000Z" },
+    { amount: 2700, date: "2021-05-07T23:15:33.000Z" },
     { amount: -100, date: "2021-09-21T06:48:16.000Z" },
-    { amount: 2450, date: "2022-02-15T17:11:59.000Z" },
+    { amount: 24050, date: "2022-02-15T17:11:59.000Z" },
     { amount: -400, date: "2022-04-19T16:49:59.000Z" },
-    { amount: 9000, date: "2022-06-15T03:26:35.000Z" },
+    { amount: 18000, date: "2022-06-15T03:26:35.000Z" },
     { amount: -1200, date: "2023-01-09T12:43:17.000Z" },
     { amount: 2100, date: "2023-05-12T19:45:23.000Z" },
-    { amount: 3100, date: "2023-12-21T19:35:13.000Z" },
+    { amount: 11100, date: "2023-12-21T19:35:13.000Z" },
     { amount: -1500, date: "2024-01-02T15:33:22.000Z" },
     { amount: -650, date: "2024-02-21T11:35:23.000Z" },
-    { amount: 1200, date: "2024-03-09T06:58:42.000Z" },
+    { amount: 1700, date: "2024-03-09T06:58:42.000Z" },
   ],
   currency: "TRY",
   locale: "tr-TR",
   interestRate: 0.75,
   password: 6666,
   expenses: {
-    "Phone bill": 120,
-    "Mortgage loan": 2000,
-    "Motor vehicle tax": 400,
+    "Phone bill": 170,
+    "House rent": 12000,
+    "Motor vehicle tax": 500,
     "Electricity bill": 135,
     "Internet bill": 225,
     "Water bill": 150,
+    "Gas bill": 1000,
   },
-  paymentsMade: [],
 };
-
-const accounts = [account1, account2, account3, account4, account5, account6];
 
 ///////////// ELEMENTS
 const labelWelcome = document.querySelector(".welcome");
@@ -213,26 +207,80 @@ const btnCloseModal = document.querySelector(".close-modal");
 
 let currentAccount, expenseType, expenseCost, timer;
 
-///// FUNCTIONS
-// create usernames
-const createUsernames = function (accs) {
-  accs.forEach((acc) => {
-    acc.username = acc.owner
+// Creating Accounts
+class Account {
+  paymentsMade = [];
+
+  constructor({
+    owner,
+    currency,
+    locale,
+    interestRate,
+    password,
+    expenses,
+    movements,
+  }) {
+    this.owner = owner;
+    this.currency = currency;
+    this.locale = locale;
+    this.interestRate = interestRate;
+    this.password = password;
+    this.expenses = expenses;
+    this.movements = movements;
+
+    this.createUsernames();
+    this.calculateBalance();
+    this.calculateSummary();
+  }
+
+  createUsernames() {
+    this.username = this.owner
       .toLowerCase()
       .split(" ")
       .map((name) => name[0])
       .join("");
-  });
-};
-createUsernames(accounts);
+  }
 
-const displayAppPage = function (acc) {
+  calculateBalance() {
+    this.balance = this.movements.reduce((acc, curr) => acc + curr.amount, 0);
+  }
+
+  calculateSummary() {
+    this.incomes = this.movements
+      .map((mov) => mov.amount)
+      .filter((mov) => mov > 0)
+      .reduce((acc, mov) => acc + mov, 0);
+
+    this.outgoings = this.movements
+      .map((mov) => mov.amount)
+      .filter((mov) => mov < 0)
+      .reduce((acc, mov) => acc + mov, 0);
+
+    this.interest = this.movements
+      .map((mov) => mov.amount)
+      .filter((mov) => mov > 0)
+      .map((income) => (income * this.interestRate) / 100)
+      .reduce((acc, int) => acc + int, 0);
+  }
+}
+
+const account1 = new Account(accountData1);
+const account2 = new Account(accountData2);
+const account3 = new Account(accountData3);
+const account4 = new Account(accountData4);
+const account5 = new Account(accountData5);
+const account6 = new Account(accountData6);
+
+const accounts = [account1, account2, account3, account4, account5, account6];
+
+////////// FUNCTIONS
+const displayAppPage = function (account) {
   // hide home-page / app-page display
   homePage.classList.add("hidden");
   appPage.classList.remove("hidden");
 
   // Change welcome message
-  labelWelcome.textContent = `Welcome ${acc.owner}!`;
+  labelWelcome.textContent = `Welcome ${account.owner}!`;
   // display logout-btn
   btnLogout.classList.remove("hidden");
   // hide info box
@@ -259,6 +307,12 @@ const resetCurrentAccount = function () {
   currentAccount = {};
 };
 
+const formatCurrency = function (value, locale, currency) {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: currency,
+  }).format(value);
+};
 const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (d1, d2) =>
     Math.round(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24));
@@ -270,34 +324,27 @@ const formatMovementDate = function (date, locale) {
   }
 };
 
-const formatCurrency = function (value, locale, currency) {
-  return new Intl.NumberFormat(locale, {
-    style: "currency",
-    currency: currency,
-  }).format(value);
-};
-
-const displayMovements = function (acc) {
+const displayMovements = function (account) {
   movementsContainer.innerHTML = "";
 
   let cumulativeSum = 0;
 
-  acc.movements.forEach(function (movement) {
+  account.movements.forEach(function (movement) {
     cumulativeSum += movement.amount;
 
     const date = new Date(movement.date);
-    const displayDate = formatMovementDate(date, acc.locale);
+    const displayDate = formatMovementDate(date, account.locale);
 
     const formattedMov = formatCurrency(
       movement.amount,
-      acc.locale,
-      acc.currency
+      account.locale,
+      account.currency
     );
 
     const formattedCumulativeSum = formatCurrency(
       cumulativeSum,
-      acc.locale,
-      acc.currency
+      account.locale,
+      account.currency
     );
 
     const html = `
@@ -311,50 +358,55 @@ const displayMovements = function (acc) {
   });
 };
 
-const calcDisplayBalance = function (acc) {
-  const amounts = acc.movements.map((mov) => mov.amount);
-
-  acc.balance = amounts.reduce((acc, mov) => acc + mov, 0);
-
+const displayBalance = function (account) {
   labelBalance.textContent = formatCurrency(
-    acc.balance,
-    acc.locale,
-    acc.currency
+    account.balance,
+    account.locale,
+    account.currency
   );
 };
 
-const calcDisplaySummary = function (acc) {
-  const incomes = acc.movements
-    .map((mov) => mov.amount)
-    .filter((mov) => mov > 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = formatCurrency(incomes, acc.locale, acc.currency);
-
-  const outgoings = acc.movements
-    .map((mov) => mov.amount)
-    .filter((mov) => mov < 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = formatCurrency(outgoings, acc.locale, acc.currency);
-
-  const interest = acc.movements
-    .map((mov) => mov.amount)
-    .filter((mov) => mov > 0)
-    .map((income) => (income * acc.interestRate) / 100)
-    .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = formatCurrency(
-    interest,
-    acc.locale,
-    acc.currency
+const displaySummary = function (account) {
+  labelSumIn.textContent = formatCurrency(
+    account.incomes,
+    account.locale,
+    account.currency
   );
+  labelSumOut.textContent = formatCurrency(
+    account.outgoings,
+    account.locale,
+    account.currency
+  );
+  labelSumInterest.textContent = formatCurrency(
+    account.interest,
+    account.locale,
+    account.currency
+  );
+};
+
+// get currency over USD
+const getCurrencyOverUSD = function (currency) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch(
+        `https://api.currencyfreaks.com/v2.0/rates/latest?apikey=43f49a7e40c94aa3aeb9832cebd76ea6&symbols=${currency}`
+      );
+      const data = await response.json();
+      const overUSD = parseFloat(Object.values(data.rates)[0]).toFixed(2);
+      resolve(overUSD);
+    } catch (err) {
+      reject(err);
+    }
+  });
 };
 
 // update payment options
-function updatePaymentOptions(acc) {
+function updatePaymentOptions(account) {
   const expenseTypeSelect = document.getElementById("expenseType");
   expenseTypeSelect.innerHTML = '<option value="">Please select...</option>';
 
-  Object.keys(acc.expenses).forEach((expense) => {
-    if (acc.paymentsMade.includes(expense)) {
+  Object.keys(account.expenses).forEach((expense) => {
+    if (account.paymentsMade.includes(expense)) {
       delete currentAccount.expenses[expense];
 
       return;
@@ -367,39 +419,13 @@ function updatePaymentOptions(acc) {
   });
 }
 
-const updateUI = function (acc) {
-  // display app page
-  displayAppPage(acc);
-
-  // dispaly balance
-  calcDisplayBalance(acc);
-
-  // display movements
-  displayMovements(acc);
-  // display summary
-  calcDisplaySummary(acc);
-
-  // update select element
-  updatePaymentOptions(acc);
-
-  // clear input areas in case click event hasn't happened
-  inputTransferAmount.value = inputTransferTo.value = "";
-  inputLoanAmount.value = "";
-
-  expenseType = document.getElementById("expenseType").value;
-  expenseCost = document.getElementById("expenseCost");
-
-  expenseCost.value = "";
-  formSelect.selectedIndex = 0;
-};
-
 // uptade cost
 function updateCost() {
   expenseType = document.getElementById("expenseType").value;
   expenseCost = document.getElementById("expenseCost");
 
   currentAccount = accounts.find(
-    (acc) => acc.username === inputLoginUsername.value
+    (account) => account.username === inputLoginUsername.value
   );
 
   const cost = currentAccount.expenses[expenseType];
@@ -437,12 +463,39 @@ const startLogOutTimer = function () {
   return timer;
 };
 
+const updateUI = function (account) {
+  // display app page
+  displayAppPage(account);
+
+  // dispaly balance
+  displayBalance(account);
+
+  // display movements
+  displayMovements(account);
+
+  // display summary
+  displaySummary(account);
+
+  // update select element
+  updatePaymentOptions(account);
+
+  // clear input areas in case click event hasn't happened
+  inputTransferAmount.value = inputTransferTo.value = "";
+  inputLoanAmount.value = "";
+
+  expenseType = document.getElementById("expenseType").value;
+  expenseCost = document.getElementById("expenseCost");
+
+  expenseCost.value = "";
+  formSelect.selectedIndex = 0;
+};
+
 ////////// EVENT LISTENERS
 btnLogin.addEventListener("click", function (e) {
   e.preventDefault();
 
   currentAccount = accounts.find(
-    (acc) => acc.username === inputLoginUsername.value
+    (account) => account.username === inputLoginUsername.value
   );
 
   if (currentAccount?.password === +inputLoginPassword.value) {
@@ -470,17 +523,41 @@ btnLogin.addEventListener("click", function (e) {
   }
 });
 
-btnTransfer.addEventListener("click", function (e) {
+btnTransfer.addEventListener("click", async function (e) {
   e.preventDefault();
   const amount = +inputTransferAmount.value;
-  const receiverAcc = accounts.find(
-    (acc) => acc.username === inputTransferTo.value
+  let fromCurrencyRate, toCurrencyRate, convertedAmount;
+
+  const receiverAccount = accounts.find(
+    (account) => account.username === inputTransferTo.value
   );
+
+  const currentCurrency = currentAccount.currency;
+  const receiverCurrency = receiverAccount.currency;
+
+  // clear input areas
   inputTransferAmount.value = inputTransferTo.value = "";
 
+  try {
+    const currentCurrencyRate = await getCurrencyOverUSD(currentCurrency);
+    fromCurrencyRate = currentCurrencyRate;
+
+    const receiverCurrencyRate = await getCurrencyOverUSD(receiverCurrency);
+    toCurrencyRate = receiverCurrencyRate;
+
+    console.log(fromCurrencyRate, toCurrencyRate);
+
+    convertedAmount = +((amount / fromCurrencyRate) * toCurrencyRate).toFixed(
+      2
+    );
+    console.log(convertedAmount);
+  } catch (error) {
+    console.error(error);
+  }
+
   if (
-    receiverAcc &&
-    receiverAcc.username !== currentAccount.username &&
+    receiverAccount &&
+    receiverAccount.username !== currentAccount.username &&
     amount > 0 &&
     currentAccount.balance >= amount
   ) {
@@ -489,7 +566,16 @@ btnTransfer.addEventListener("click", function (e) {
 
     currentAccount.movements.push({ amount: -amount, date: formattedDate });
 
-    receiverAcc.movements.push({ amount: amount, date: formattedDate });
+    receiverAccount.movements.push({
+      amount: convertedAmount,
+      date: formattedDate,
+    });
+
+    // calculate balance and summary
+    currentAccount.calculateBalance();
+    currentAccount.calculateSummary();
+    receiverAccount.calculateBalance();
+    receiverAccount.calculateSummary();
 
     updateUI(currentAccount);
 
@@ -514,6 +600,10 @@ btnLoan.addEventListener("click", function (e) {
       const now = new Date();
       const formattedDate = now.toISOString();
       currentAccount.movements.push({ amount: amount, date: formattedDate });
+
+      // calculate balance and summary
+      currentAccount.calculateBalance();
+      currentAccount.calculateSummary();
 
       updateUI(currentAccount);
     }, 3000);
@@ -543,8 +633,10 @@ btnPayment.addEventListener("click", function (e) {
     });
 
     currentAccount.paymentsMade.push(expenseTypeSelect.value);
-    // console.log(currentAccount.paymentsMade);
-    // console.log(currentAccount.expenses);
+
+    // calculate balance and summary
+    currentAccount.calculateBalance();
+    currentAccount.calculateSummary();
     updateUI(currentAccount);
 
     // reset timer
@@ -576,3 +668,5 @@ const closeModal = function () {
 btnOpenModal.addEventListener("click", openModal);
 btnCloseModal.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
+
+//////////////// Currency Converter
