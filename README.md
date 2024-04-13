@@ -8,12 +8,15 @@
 <p>Columba Bank offers a range of functionalities to its users:
 </p>
 <ul>
-  <li><strong>Transfer Funds:</strong> Users can send money to predefined accounts within the bank.
+  <li><strong>User Authentication:</strong> Secure login and logout functionality.</li>
+  <li><strong>Account Management:</strong> View balance, movements, and summary of transactions including incoming, outgoing, and interest earnings.</li>
+  <li><strong>Transfer Funds:</strong> Perform currency conversions and transfer funds between accounts.
 </li>
   <li><strong>Loan Request:</strong> Users have the option to apply for loans, with the amount capped at twice the highest deposit made to their account.
 </li>
-  <li><strong>Bill Payments:</strong> Facilitates the payment of bills directly from the user's account.
+  <li><strong>Bill Payments:</strong> Pay predefined expenses, which are dynamically adjusted based on the user’s transaction history.
 </li>
+   <li><strong>Session Timeout:</strong> Automatic logout after a period of inactivity for added security.</li>
   <li><strong>Logout:</strong> Securely log out of the banking session.
 </li>
 </ul>
@@ -38,6 +41,7 @@
   <li>HTML5</li>
   <li>CSS3</li>
   <li>JavaScript</li>
+  <li>Fetch API</li>
 </ul>
 
 <h2>Visit Columba Bank</h2>
