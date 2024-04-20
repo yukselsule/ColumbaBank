@@ -264,15 +264,18 @@ class Account {
   }
 }
 
-const account1 = new Account(accountData1);
-const account2 = new Account(accountData2);
-const account3 = new Account(accountData3);
-const account4 = new Account(accountData4);
-const account5 = new Account(accountData5);
-const account6 = new Account(accountData6);
+const accountsData = [
+  accountData1,
+  accountData2,
+  accountData3,
+  accountData4,
+  accountData5,
+  accountData6,
+];
 
-const accounts = [account1, account2, account3, account4, account5, account6];
-
+const accounts = accountsData.map((accountData) => {
+  return new Account(accountData);
+});
 ////////// FUNCTIONS
 const displayAppPage = function (account) {
   // hide home-page / app-page display
@@ -313,6 +316,7 @@ const formatCurrency = function (value, locale, currency) {
     currency: currency,
   }).format(value);
 };
+
 const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (d1, d2) =>
     Math.round(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24));
@@ -448,7 +452,6 @@ const startLogOutTimer = function () {
 
     if (time === 0) {
       clearInterval(timer);
-      labelWelcome.textContent = "Welcome to Columba Bank!";
       displayHomePage();
       resetCurrentAccount();
     }
