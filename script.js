@@ -53,6 +53,7 @@ const accountData2 = {
     "Electricity bill": 45,
     "Internet bill": 60,
     "Water bill": 35,
+    "Gas bill": 200,
   },
 };
 
@@ -169,6 +170,7 @@ const accountData6 = {
     "Internet bill": 225,
     "Water bill": 150,
     "Gas bill": 1000,
+    "Student loan payment": 550,
   },
 };
 
