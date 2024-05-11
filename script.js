@@ -172,8 +172,36 @@ const accountData6 = {
     "Gas bill": 1000,
     "Student loan payment": 550,
   },
+  
 };
-
+const accountData7 = {
+  owner: "Saifullah",
+  movements: [
+    { amount: 430, date: "2021-08-19T09:12:34.000Z" },
+    { amount: 10000, date: "2021-12-23T10:28:46.000Z" },
+    { amount: 7000, date: "2022-05-01T11:23:00.000Z" },
+    { amount: -500, date: "2022-08-22T14:14:15.000Z" },
+    { amount: 1500, date: "2023-02-18T16:33:22.000Z" },
+    { amount: -6500, date: "2023-04-25T10:45:23.000Z" },
+    { amount: 12000, date: "2023-07-29T12:58:42.000Z" },
+    { amount: -550, date: "2023-11-05T14:17:56.000Z" },
+    { amount: 3750, date: "2023-11-11T11:32:04.000Z" },
+    { amount: -200, date: "2024-03-06T15:15:23.000Z" },
+  ],
+  currency: "PKR",
+  locale: "it-IT",
+  interestRate: 1.5,
+  password: 5421,
+  expenses: {
+    "Phone bill": 15,
+    "Mortgage loan": 2500,
+    "Motor vehicle tax": 125,
+    "Electricity bill": 55,
+    "Gas bill": 30,
+    "Internet bill": 30,
+    "Water bill": 25,
+  },
+};
 ///////////// ELEMENTS
 const labelWelcome = document.querySelector(".welcome");
 const labelDate = document.querySelector(".balance__date");
@@ -273,6 +301,7 @@ const accountsData = [
   accountData4,
   accountData5,
   accountData6,
+  accountData7
 ];
 
 const accounts = accountsData.map((accountData) => {
@@ -498,6 +527,7 @@ const updateUI = function (account) {
 ////////// EVENT LISTENERS
 btnLogin.addEventListener("click", function (e) {
   e.preventDefault();
+  console.log(accounts);
 
   currentAccount = accounts.find(
     (account) => account.username === inputLoginUsername.value
@@ -518,6 +548,7 @@ btnLogin.addEventListener("click", function (e) {
       year: "2-digit",
       weekday: "short",
     };
+   
 
     labelDate.textContent = new Intl.DateTimeFormat(
       currentAccount.locale,
@@ -525,6 +556,29 @@ btnLogin.addEventListener("click", function (e) {
     ).format(now);
 
     updateUI(currentAccount);
+  }
+  else{
+    let timerInterval;
+    Swal.fire({
+      title: "Auto close alert!",
+      html: "Username and password didnt match",
+      timer: 5000,
+      timerProgressBar: false,
+      didOpen: () => {
+        const timer = Swal.getPopup().querySelector("b");
+        timerInterval = setInterval(() => {
+          timer.textContent = `${Swal.getTimerLeft()}`;
+        }, 100);
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log("I was closed by the timer");
+      }
+    });    // alert("Username and password didn't match")
   }
 });
 
