@@ -248,6 +248,22 @@ main {
   border-radius: 5px;
 }
 
+/* /////////// POP-UP ///////////////// */
+.pop-up {
+  padding: 3rem 6rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: 2rem;
+  background-color: #d6b564;
+  box-shadow: 0 3rem 5rem rgba(21, 27, 28, 0.3);
+  border-radius: 11px;
+
+  z-index: 1111;
+}
+
 /* /////////// APP PAGE /////////////// */
 
 .app-page {

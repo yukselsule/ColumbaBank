@@ -205,7 +205,8 @@ const infoBox = document.querySelector(".login-info-box");
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const btnOpenModal = document.querySelector(".open-modal");
-const btnCloseModal = document.querySelector(".close-modal");
+const btnCloseModal = document.querySelectorAll(".close-modal");
+const popUp = document.querySelector(".pop-up");
 
 let currentAccount, expenseType, expenseCost, timer;
 
@@ -503,6 +504,14 @@ btnLogin.addEventListener("click", function (e) {
     (account) => account.username === inputLoginUsername.value
   );
 
+  if (
+    !currentAccount ||
+    currentAccount.password !== +inputLoginPassword.value
+  ) {
+    popUp.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+  }
+
   if (currentAccount?.password === +inputLoginPassword.value) {
     // timer
     if (timer) clearInterval(timer);
@@ -667,9 +676,10 @@ const openModal = function () {
 const closeModal = function () {
   modal.classList.add("hidden");
   overlay.classList.add("hidden");
+  popUp.classList.add("hidden");
 };
 
 // click events
 btnOpenModal.addEventListener("click", openModal);
-btnCloseModal.addEventListener("click", closeModal);
+btnCloseModal.forEach((modal) => modal.addEventListener("click", closeModal));
 overlay.addEventListener("click", closeModal);
