@@ -210,7 +210,6 @@ const popUp = document.querySelector(".pop-up");
 
 let currentAccount, expenseType, expenseCost, timer;
 
-// Creating Accounts
 class Account {
   paymentsMade = [];
 
@@ -279,34 +278,25 @@ const accountsData = [
 const accounts = accountsData.map((accountData) => {
   return new Account(accountData);
 });
+
 ////////// FUNCTIONS
 const displayAppPage = function (account) {
-  // hide home-page / app-page display
   homePage.classList.add("hidden");
   appPage.classList.remove("hidden");
-
-  // Change welcome message
-  labelWelcome.textContent = `Welcome ${account.owner}!`;
-  // display logout-btn
   btnLogout.classList.remove("hidden");
-  // hide info box
   infoBox.classList.add("hidden");
+
+  labelWelcome.textContent = `Welcome ${account.owner}!`;
 };
 
 const displayHomePage = function () {
-  // hide app-page / display home-page
   homePage.classList.remove("hidden");
   appPage.classList.add("hidden");
-
-  // clear input fields
-  inputLoginPassword.value = inputLoginUsername.value = "";
-
-  // Change welcome message
-  labelWelcome.textContent = `Welcome to Columba Bank!`;
-  // display logout-btn
   btnLogout.classList.add("hidden");
-  // hide info box
   infoBox.classList.remove("hidden");
+
+  inputLoginPassword.value = inputLoginUsername.value = "";
+  labelWelcome.textContent = `Welcome to Columba Bank!`;
 };
 
 const resetCurrentAccount = function () {
@@ -391,7 +381,6 @@ const displaySummary = function (account) {
   );
 };
 
-// get currency over USD
 const getCurrencyOverUSD = function (currency) {
   return new Promise(async (resolve, reject) => {
     try {
@@ -407,7 +396,6 @@ const getCurrencyOverUSD = function (currency) {
   });
 };
 
-// update payment options
 function updatePaymentOptions(account) {
   const expenseTypeSelect = document.getElementById("expenseType");
   expenseTypeSelect.innerHTML = '<option value="">Please select...</option>';
@@ -426,7 +414,6 @@ function updatePaymentOptions(account) {
   });
 }
 
-// uptade cost
 function updateCost() {
   expenseType = document.getElementById("expenseType").value;
   expenseCost = document.getElementById("expenseCost");
@@ -445,7 +432,6 @@ function updateCost() {
   }
 }
 
-// timer
 const startLogOutTimer = function () {
   const tick = function () {
     const min = String(Math.trunc(time / 60)).padStart(2, 0);
@@ -470,22 +456,12 @@ const startLogOutTimer = function () {
 };
 
 const updateUI = function (account) {
-  // display app page
   displayAppPage(account);
-
-  // dispaly balance
   displayBalance(account);
-
-  // display movements
   displayMovements(account);
-
-  // display summary
   displaySummary(account);
-
-  // update select element
   updatePaymentOptions(account);
 
-  // clear input areas in case click event hasn't happened
   inputTransferAmount.value = inputTransferTo.value = "";
   inputLoanAmount.value = "";
 
@@ -513,11 +489,9 @@ btnLogin.addEventListener("click", function (e) {
   }
 
   if (currentAccount?.password === +inputLoginPassword.value) {
-    // timer
     if (timer) clearInterval(timer);
     timer = startLogOutTimer();
 
-    // current date and time
     const now = new Date();
     const options = {
       hour: "numeric",
@@ -549,7 +523,6 @@ btnTransfer.addEventListener("click", async function (e) {
   const currentCurrency = currentAccount.currency;
   const receiverCurrency = receiverAccount.currency;
 
-  // clear input areas
   inputTransferAmount.value = inputTransferTo.value = "";
 
   try {
@@ -559,12 +532,9 @@ btnTransfer.addEventListener("click", async function (e) {
     const receiverCurrencyRate = await getCurrencyOverUSD(receiverCurrency);
     toCurrencyRate = receiverCurrencyRate;
 
-    console.log(fromCurrencyRate, toCurrencyRate);
-
     convertedAmount = +((amount / fromCurrencyRate) * toCurrencyRate).toFixed(
       2
     );
-    console.log(convertedAmount);
   } catch (error) {
     console.error(error);
   }
@@ -585,7 +555,6 @@ btnTransfer.addEventListener("click", async function (e) {
       date: formattedDate,
     });
 
-    // calculate balance and summary
     currentAccount.calculateBalance();
     currentAccount.calculateSummary();
     receiverAccount.calculateBalance();
@@ -593,7 +562,6 @@ btnTransfer.addEventListener("click", async function (e) {
 
     updateUI(currentAccount);
 
-    // reset timer
     clearInterval(timer);
     timer = startLogOutTimer();
   }
@@ -615,13 +583,12 @@ btnLoan.addEventListener("click", function (e) {
       const formattedDate = now.toISOString();
       currentAccount.movements.push({ amount: amount, date: formattedDate });
 
-      // calculate balance and summary
       currentAccount.calculateBalance();
       currentAccount.calculateSummary();
 
       updateUI(currentAccount);
     }, 3000);
-    // reset timer
+
     clearInterval(timer);
     timer = startLogOutTimer();
   }
@@ -648,12 +615,10 @@ btnPayment.addEventListener("click", function (e) {
 
     currentAccount.paymentsMade.push(expenseTypeSelect.value);
 
-    // calculate balance and summary
     currentAccount.calculateBalance();
     currentAccount.calculateSummary();
     updateUI(currentAccount);
 
-    // reset timer
     clearInterval(timer);
     timer = startLogOutTimer();
   }
@@ -667,7 +632,6 @@ btnLogout.addEventListener("click", function (e) {
 });
 
 //////// MODAL WINDOW -- LOGIN INFO BOX
-// functions
 const openModal = function () {
   modal.classList.remove("hidden");
   overlay.classList.remove("hidden");
@@ -679,7 +643,6 @@ const closeModal = function () {
   popUp.classList.add("hidden");
 };
 
-// click events
 btnOpenModal.addEventListener("click", openModal);
 btnCloseModal.forEach((modal) => modal.addEventListener("click", closeModal));
 overlay.addEventListener("click", closeModal);
